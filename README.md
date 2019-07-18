@@ -26,3 +26,11 @@ pipenv install django
 ```bash
 pipenv shell
 ```
+
+## Start Django Project
+- Run 
+```bash
+django-admin startproject <project_name> .
+```
+Note: Your name for the project replaces project_name.
+**Strong**Important: Remember to insert a "space" and a "." after project_name to avoid creating an extra directory.
