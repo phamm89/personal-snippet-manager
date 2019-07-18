@@ -101,8 +101,10 @@ Debug Toolbar is a helpful tool for debugging. Follow the directions at the foll
 ```bash
 {
   "scripts": {
-    "start": "watchify -o <output_file.js> <input_file.js>",
-    "compile": "browserify -o <output_file.js> <input_file.js>"
+    "start": "npm-run-all -p -l django watch:js",
+    "django": "python manage.py runserver",
+    "start": "watchify -v -o <output_file.js> <input_file.js>",
+    "compile": "browserify -o <output_file.js> <input_file.js>",
   }
 }
 ```  

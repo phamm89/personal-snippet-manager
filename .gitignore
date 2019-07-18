@@ -200,4 +200,7 @@ dmypy.json
 ### Node Module ###
 node_modules/
 
+### JS ###
+compiled.js
+
 # End of https://www.gitignore.io/api/python,django,visualstudiocode
