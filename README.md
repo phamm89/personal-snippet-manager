@@ -47,3 +47,18 @@ open .gitignore
 python3 manage.py startapp <app_name>
 ```  
 Note: Your name for the app replaces app_name. A common app_name is "core".
+
+## Register the app
+- Open **settings.py** and find ```INSTALLED_APPS```
+- Add <app_name> to the bottom as follows:
+```bash
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'app_name', 
+]
+``` 
