@@ -26,8 +26,8 @@
             <a class="f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l" href="{% url 'index' %}">Home</a>
             <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="">Search for Code Snippet...</a>
             <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="">Add a code snippet</a>
-            {% if rquest.customeruser.is_authenticated %}
-            Logged in as {{ request.customuser }}  |    <a href="">User Profile Page</a>    |   <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="{% url 'auth_logout' %}">Logout</a>
+            {% if rquest.user.is_authenticated %}
+            Logged in as {{ request.user }}  |    <a href="">User Profile Page</a>    |   <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="{% url 'auth_logout' %}">Logout</a>
           {% else %}
             <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="{% url 'auth_login' %}">Login</a> |
             <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="{% url 'registration_register' %}">Register</a>

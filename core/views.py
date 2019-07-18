@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from core.models import Snippet
 
 # Views created for Code Snippet
 def index(request):
