@@ -5,6 +5,8 @@
     "watchify": "^3.11.1"
   }, 
   "scripts": {
+    "start": "npm-run-all -p -l django watch:js",
+    "django": "python manage.py runserver",
     "start": "watchify -v -o core/static/compiled.js core/static/main.js",
     "compiled": "browserify -o core/static/compiled.js core/static/main.js"
   }
