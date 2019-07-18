@@ -86,3 +86,7 @@ To delete your branch, you can run the following:
 ```bash
 git branch -d <branch_name>
 ```  
+
+## Installing Debug Toolbar
+Debug Toolbar is a helpful tool for debugging. Follow the directions at the following site:
+[https://django-debug-toolbar.readthedocs.io/en/latest/installation.html](https://django-debug-toolbar.readthedocs.io/en/latest/installation.html)
