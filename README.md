@@ -11,3 +11,18 @@ In Momentum Learning, my group is working on developing a Code Snippet Manager w
 ```bash
 git clone https://github.com/<username>/<repo-name>.git
 ```
+
+## Setting up a Django Development Environment
+- ```cd``` into your repository directory
+- Run 
+```bash
+pipenv --three
+```
+- Run the following to install Django:
+```bash
+pipenv install django
+```
+- Run the following to enter your virtual environment:
+```bash
+pipenv shell
+```
