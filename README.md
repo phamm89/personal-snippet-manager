@@ -42,3 +42,8 @@ touch .gitignore
 open .gitignore
 ```  
 - Copy content from [https://gitignore.io/api/python,visualstudiocode](https://gitignore.io/api/python,visualstudiocode) and paste into .gitignore file
+- Create app for project:
+```bash
+python3 manage.py startapp <app_name>
+```  
+Note: Your name for the app replaces app_name. A common app_name is "core".
