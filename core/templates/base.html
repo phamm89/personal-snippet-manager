@@ -29,8 +29,8 @@
             {% if rquest.user.is_authenticated %}
             Logged in as {{ request.user }}  |    <a href="">User Profile Page</a>    |   <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="{% url 'auth_logout' %}">Logout</a>
           {% else %}
-            <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="{% url 'auth_login' %}">Login</a> |
-            <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="{% url 'registration_register' %}">Register</a>
+            <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="">Login</a> |
+            <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="">Register</a>
           {% endif %}
           </nav>
         </header>

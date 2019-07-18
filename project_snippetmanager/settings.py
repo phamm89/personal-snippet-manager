@@ -31,12 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites', 
+    'registration', #Third-party app
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Personal app
     'core',
 
     # Third-party apps
@@ -132,3 +136,8 @@ INTERNAL_IPS = ['127.0.0.1']
 
 # For Custom User Authentication
 AUTH_USER_MODEL = 'core.CustomUser'
+
+
+# Registration Information
+ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
+REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
