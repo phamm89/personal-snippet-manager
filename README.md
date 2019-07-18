@@ -109,3 +109,6 @@ Debug Toolbar is a helpful tool for debugging. Follow the directions at the foll
 }
 ```  
 6. Use ```npm run start``` to start watching your input file for changes.
+
+## Django Registration Redux
+Django Registration Redux is a login/logout setup provided by Django. To set up, follow the directions at the following site: [https://django-registration-redux.readthedocs.io/en/latest/](https://django-registration-redux.readthedocs.io/en/latest/)
