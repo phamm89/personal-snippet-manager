@@ -32,7 +32,7 @@ pipenv shell
 ```bash
 django-admin startproject <project_name> .
 ```
-Note: Your name for the project replaces project_name.  
+**Note:** Your name for the project replaces project_name.  
 **Important**: Remember to insert a "space" and a "." after project_name to avoid creating an extra directory.
 - Create a .gitignore file by doing the following:
 ```bash
@@ -46,7 +46,7 @@ open .gitignore
 ```bash
 python3 manage.py startapp <app_name>
 ```  
-Note: Your name for the app replaces app_name. A common app_name is "core".
+**Note:** Your name for the app replaces app_name. A common app_name is "core".
 
 ## Register the app
 - Open **settings.py** and find ```INSTALLED_APPS```
@@ -62,3 +62,27 @@ INSTALLED_APPS = [
     'app_name', 
 ]
 ``` 
+
+## Working in group projects
+If you are working in a group project, you can create a branch from the origin/master branch to make a contribution to the project as follows:
+```bash
+git checkout -b <branch_name>
+```  
+**Note:** Your name for the branch replaces branch_name.  
+
+Once you have finished your branch, you can push your branch to the repository as follows:
+```bash
+git push origin <branch_name>
+```  
+
+Create a pull request to merge the code from your branch with the master branch. After the merge, you can pull the updated master branch into your local master branch as follows:
+```bash
+git checkout master
+git fetch upstream
+git merge upstream/master
+```  
+
+To delete your branch, you can run the following:
+```bash
+git branch -d <branch_name>
+```  
