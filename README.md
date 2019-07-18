@@ -34,3 +34,11 @@ django-admin startproject <project_name> .
 ```
 Note: Your name for the project replaces project_name.  
 **Important**: Remember to insert a "space" and a "." after project_name to avoid creating an extra directory.
+- Create a .gitignore file by doing the following:
+```bash
+touch .gitignore
+```  
+```bash
+open .gitignore
+```  
+- Copy content from [https://gitignore.io/api/python,visualstudiocode](https://gitignore.io/api/python,visualstudiocode) and paste into .gitignore file
