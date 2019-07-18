@@ -90,3 +90,20 @@ git branch -d <branch_name>
 ## Installing Debug Toolbar
 Debug Toolbar is a helpful tool for debugging. Follow the directions at the following site:
 [https://django-debug-toolbar.readthedocs.io/en/latest/installation.html](https://django-debug-toolbar.readthedocs.io/en/latest/installation.html)
+
+## NPM and Django
+1. Create a ```package.json``` file with contents ```{"private": true}```
+2. Make sure ```node_modules/``` is in your ```.gitignore``` file.
+3. Install ```browserify``` and ```watchify```: ```npm install browserify watchify```
+4. Try using ```browserify``` on your current JS: ```npx browserify -o <output_file.js> <input_file.js>```
+5. Add a ```scripts``` section to ```package.json```:
+*content_copy*
+```bash
+{
+  "scripts": {
+    "start": "watchify -o <output_file.js> <input_file.js>",
+    "compile": "browserify -o <output_file.js> <input_file.js>"
+  }
+}
+```  
+6. Use ```npm run start``` to start watching your input file for changes.
