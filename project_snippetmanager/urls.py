@@ -18,13 +18,26 @@ from django.urls import path, include
 from django.conf import settings 
 # Add static settings to serve up static files in development 
 from django.conf.urls.static import static
+# Core APP
 from core import views as core_views
+# Core_API APP
+from rest_framework import routers
+from core_api import views as core_api_views
+
+router = routers.DefaultRouter()
+router.register('customeruser', core_api_views.CustomUserViewSet)
+router.register('snippet', core_api_views.SnippetViewSet)
+
 
 urlpatterns = [
     path('', core_views.index, name='index'), 
     path('accounts/', include('registration.backends.simple.urls')),
     path('add_snippet/', core_views.add_snippet, name='add_snippet'),
     path('admin/core/snippet/<int:pk>/change/', core_views.SnippetUpdate.as_view(), name='edit_snippet'),
+    # Wire up our API using automatic URL routing.
+    # Additionally, we include login URLs for the browsable API.
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
 

@@ -11,4 +11,4 @@ class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
 class SnippetSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Snippet
-        fields = ['snippet_title', 'snippet_lang', 'snippet_code', 'snippet_description', 'snippet_creator', 'snippet_copy', 'date_added']
+        fields = ['snippet_title', 'snippet_lang', 'snippet_code', 'snippet_description', 'snippet_creator', 'snippet_copy', 'date_added', 'pk']
