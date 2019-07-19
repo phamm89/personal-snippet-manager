@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
     searchForm.addEventListener('submit', function(event) {
         event.preventDefault()
         input = encodeURIComponent(searchBar.value)
-        searchURL = `http://localhost:8000/search?term=${(input)}`
+        searchURL = `http://localhost:8000/?search=${(input)}`
 
         fetch(searchURL)
             .then(response => response.json())
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 
                 for (let codes of data.results){
-                    searchResults.appendChild(getMusic(codes))
+                    searchResults.appendChild(getSearch(codes))
                 }
         })
     })
