@@ -9,9 +9,39 @@
     </h1>
     <h4 class="mt2 mb0 f6 fw4 ttu tracked">
         <ul>
-            <p>{{ snippet_codes }} Code Snippets</p>
+            <p>{{ snippet_codes_count }} Code Snippets</p>
         </ul>
     </h4>
+    <br>
+    <h2 class="snippet_header">Snippets of Code</h2>
+    {% if user.is_authenticated %}
+    <div class='tc center avenir w-70'>
+        {% for obj in snippet_codes %}
+          <div class='ba bg-blue white'>
+            <p><strong> {{obj.snippet_title}}</strong></p>
+          </div>
+          <div>
+              <p>by {{obj.snippet_creator}}</p>
+              <p>added {{obj.date_added}}</p>
+          </div>
+          <div>
+            <p> Language: {{obj.snippet_lang}}</p>
+          </div>
+          <div>
+            <p>{{obj.snippet_code }}</p>
+          </div>
+        {% endfor %} 
+        <a class="f5 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="">Add Snippet</a>
+   </div>
+  
+   {% else %}
+   
+   <div>
+    {% load static %}
+    <img class= "br3" src="{% static "static/otter.png" %}" alt="Otter waving">
+   </div>
+
+   {% endif %}
     </div>
 </header>
  
