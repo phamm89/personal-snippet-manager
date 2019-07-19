@@ -24,6 +24,7 @@ urlpatterns = [
     path('', core_views.index, name='index'), 
     path('accounts/', include('registration.backends.simple.urls')),
     path('add_snippet/', core_views.add_snippet, name='add_snippet'),
+    path('admin/core/snippet/<int:pk>/change/', core_views.SnippetUpdate.as_view(), name='edit_snippet'),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
 
