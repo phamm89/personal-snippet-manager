@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_list_or_404, redirect
 from core.models import Snippet
 from core.forms import SnippetForm
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 # Views created for Code Snippet
@@ -35,6 +35,13 @@ def add_snippet(request):
 # View to update snippet
 class SnippetUpdate(UpdateView):
     """View for editing daily record"""
+    model = Snippet
+    fields = '__all__'
+    success_url = reverse_lazy('index')
+
+# View to delete snippet
+class SnippetDelete(DeleteView):
+    """View for deleting snippet file"""
     model = Snippet
     fields = '__all__'
     success_url = reverse_lazy('index')

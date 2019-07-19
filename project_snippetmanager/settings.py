@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # Third-party apps
     'debug_toolbar',
     'rest_framework',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -151,3 +152,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+# Crispy Forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
