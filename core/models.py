@@ -12,7 +12,6 @@ class CustomUser(AbstractUser):
 class Snippet(models.Model):
         """Model Representing a Snippet Model"""
         title = models.CharField(max_length=200, help_text="Enter title for snippet of code")
-
         PYTHON = 'python'
         JAVASCRIPT = 'js'
         HTML = 'html'
@@ -56,23 +55,23 @@ class Snippet(models.Model):
         ]
 
         languages = models.CharField(
-        max_length=10,
+        max_length=7,
         choices=LANGUAGE_CHOICES,
         default=HTML,
     )
 
-        code = models.TextField(help_text="Enter the snippet code.")
+        code = models.TextField(help_text="Enter the snippet code")
         
         # Description field is optional
         description = models.TextField(max_length=200, null=True, blank=True, help_text="Enter a docstring to describe the snippet of code.")
         
         # More descriptive than user
-        creator = models.CharField(max_length=200, help_text="Enter the name of the creator.")
+        creator = models.ForeignKey(to=CustomUser, on_delete=models.CASCADE)
 
         date_added = models.DateTimeField(auto_now_add=True)
 
-        # ManyToManyField used because user list can contain many snippets 
-        copy_snippet = models.ManyToManyField(to=CustomUser, through='UserPage', help_text='Click to add snippet to user page.')
+         # ManyToManyField used because user list can contain many snippets 
+        copy_snippet = models.ManyToManyField(to=CustomUser, through='UserPage', help_text='Click to add snippet to user page.', related_name='LoggedIn')
         
         class Meta: 
             ordering = ['-date_added']
@@ -95,5 +94,5 @@ class UserPage(models.Model):
         ordering = ['-copied_at']
     
     def __str__(self):
-        """String for representing the Favorite object."""
+        """String for representing the copied object."""
         return f"{self.user.username} - {self.snippet.title}"

@@ -55,24 +55,25 @@ class SnippetDetailView(generic.DetailView):
 
 
 
+# View to copy snippet
 def copy_snippet(request, pk):
-    """View function for user to favorite or unfavorite a book."""
+    """View function for user to copy snippet to user page."""
     snippet = get_object_or_404(Snippet, pk=pk)
     
     if request.method == 'GET':
         if request.user in snippet.copy_snippet.all():
             snippet.copy_snippet.remove(request.user)
-            messages.info(request, f"You have removed {snippet.copy_snippet} from your favorites book list.")
+            messages.info(request, f"You have removed {snippet.copy_snippet} from your user page.")
         else:
             snippet.copy_snippet.add(request.user)
-            messages.success(request, f"You have added {snippet.copy_snippet} from your favorites book list.")
+            messages.success(request, f"You have added {snippet.copy_snippet} to your user page.")
             
     return HttpResponseRedirect(request.GET.get("next"))
 
 
 
 def user_view(request):
-    """View function for user to view all books in favorite list."""
+    """View function for user to view all code snippets on user page."""
     user_list = UserPage.objects.filter(user=request.user)
 
     return render(request, 'core/user_detail.html', {'user_list': user_list})
@@ -100,7 +101,4 @@ def search_snippet(request):
 
     return render(request, 'base.html', {'snippets': snippets})
 
-class SnippetDelete(DeleteView):
-    model = Snippet
-    success_url = reverse_lazy('index')
     
