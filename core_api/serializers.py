@@ -11,4 +11,4 @@ class CustomUserSerializer(serializers.ModelSerializer):
 class SnippetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Snippet
-        fields = ['title', 'languages', 'snippet_code', 'description', 'creator', 'copy', 'date_added', 'pk']
+        fields = ['url', 'title', 'languages', 'code', 'description', 'creator', 'date_added', 'pk']

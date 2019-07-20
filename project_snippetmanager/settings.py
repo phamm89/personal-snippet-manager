@@ -41,11 +41,14 @@ INSTALLED_APPS = [
 
     # Personal app
     'core',
+    'core_api',
 
     # Third-party apps
     'debug_toolbar',
     'rest_framework',
+    'django_filters',
     'crispy_forms',
+    
 ]
 
 MIDDLEWARE = [
@@ -149,6 +152,7 @@ LOGIN_REDIRECT_URL = '/'
 
 # Pagination
 REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
