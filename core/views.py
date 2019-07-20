@@ -3,6 +3,7 @@ from core.models import Snippet
 from core.forms import SnippetForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 # Views created for Code Snippet
 def index(request):
@@ -40,8 +41,14 @@ class SnippetUpdate(UpdateView):
     success_url = reverse_lazy('index')
 
 # View to delete snippet
-class SnippetDelete(DeleteView):
-    """View for deleting snippet file"""
-    model = Snippet
-    fields = '__all__'
-    success_url = reverse_lazy('index')
+def delete_snippet(request):
+    snippet = get_list_or_404(Snippet)
+
+    creator = snippet.user.username
+
+    if request.method =="POST" and request.user.is_authenticated and request.user.username == creator:
+        snippet.delete()
+        messages.success(request, "Code snippet deleted!")
+        return redirect('index')
+    
+    return render(request, 'core/snippet_confirm_delete.html')

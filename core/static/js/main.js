@@ -32,15 +32,23 @@ function getSearch(codes){
     const resultsDiv = document.createElement('div')
     resultsDiv.setAttribute("id", "resultsDiv")
     resultsDiv.innerHTML = `
-        <ul style="list-style: none;" class="detail-list">
-        <div class='ba bg-blue white'>
-            <li class="list-item title">${codes.snippet_title}</li>
-        </div>
-            <br>
-            <li class="list-item creator-and-date"><h4>Creator: ${codes.snippet_creator} <br> Date Added: ${codes.date_added}</h4></li> 
-            <li class="list-item language"><h4>Language: ${codes.snippet_lang}</h4></li> 
-            <li class="list-item code"><h4>Code: ${codes.snippet_code}</h4></li> 
-        </ul>   
+            <div class='ba bg-blue white'>
+                <p><strong>${codes.title}</strong></p>
+                <a class='f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue' href="{{ codes.get_absolute_url }}">Edit</a>
+                <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'add_snippet' %}">Add New</a>
+                <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'delete_snippet' %}">Delete</a>
+            </div>
+            <div>
+                <p>by ${codes.creator}</p>
+                <p>added ${codes.date_added}</p>
+            </div>
+            <div>
+                <p> Language: ${codes.languages}</p>
+            </div>
+            <div><pre><code class='language-${codes.languages}'>
+                <p>${codes.code }</p>
+            </code></pre>
+            </div>
     `
 
     return resultsDiv

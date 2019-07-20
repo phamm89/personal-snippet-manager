@@ -23,21 +23,22 @@ from core import views as core_views
 # Core_API APP
 from rest_framework import routers
 from core_api import views as core_api_views
+from core_api.views import SnippetViewSet, CustomUserViewSet
 
 router = routers.DefaultRouter()
-router.register('customeruser', core_api_views.CustomUserViewSet)
-router.register('snippet', core_api_views.SnippetViewSet)
-
+router.register(r'snippets', SnippetViewSet)
+router.register(r'customusers', CustomUserViewSet)
 
 urlpatterns = [
     path('', core_views.index, name='index'), 
     path('accounts/', include('registration.backends.simple.urls')),
     path('add_snippet/', core_views.add_snippet, name='add_snippet'),
     path('admin/core/snippet/<int:pk>/change/', core_views.SnippetUpdate.as_view(), name='edit_snippet'),
+    path('delete', core_views.delete_snippet, name='delete_snippet'),
     # Wire up our API using automatic URL routing.
     # Additionally, we include login URLs for the browsable API.
-    path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
 
