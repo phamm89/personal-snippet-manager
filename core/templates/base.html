@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
   <!-- Add additional CSS in static file -->
   {% load static %}
-  <link rel="stylesheet" href="{% static 'styles.css' %}">
-  <script src="{% static 'compiled.js' %}" defer></script>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/prism.css' %}"/>
+  <script src="{% static 'js/prism.js' %}" defer></script>
+  <script src="{% static 'js/compiled.js' %}" defer></script>
 </head>
 <body>
   <header class="flex items-center justify-center bg-gray white ph3">

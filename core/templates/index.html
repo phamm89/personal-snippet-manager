@@ -30,8 +30,9 @@
           <div>
             <p> Language: {{obj.languages}}</p>
           </div>
-          <div>
-            <p>{{obj.code }}</p>
+          <div><pre><code class='language-{{obj.languages}}'>
+          <p>{{obj.code }}</p>
+          </code></pre>
           </div>
         {% endfor %} 
         <a class="f5 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'add_snippet' %}">Add Snippet</a>

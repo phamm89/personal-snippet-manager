@@ -12,7 +12,7 @@ class CustomUser(AbstractUser):
 class Snippet(models.Model):
         """Model Representing a Snippet Model"""
         title = models.CharField(max_length=200, help_text="Enter title for snippet of code")
-        
+
         PYTHON = 'python'
         JAVASCRIPT = 'js'
         HTML = 'html'
@@ -56,7 +56,7 @@ class Snippet(models.Model):
         ]
 
         languages = models.CharField(
-        max_length=5,
+        max_length=10,
         choices=LANGUAGE_CHOICES,
         default=HTML,
     )
