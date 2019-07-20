@@ -48,12 +48,21 @@ class SnippetUpdate(UpdateView):
 def delete_snippet(request):
     snippet = get_list_or_404(Snippet)
 
-    creator = snippet.user.username
-
-    if request.method =="POST" and request.user.is_authenticated and request.user.username == creator:
+    if request.method =="POST":
         snippet.delete()
         messages.success(request, "Code snippet deleted!")
         return redirect('index')
     
     return render(request, 'core/snippet_confirm_delete.html')
+
+# View to search snippet
+def search_snippet(request):
+    if request.method == "POST":
+        search_text = request.POST['search_text']
+    else:
+        search_text = ''
+    
+    snippets = Snippet.objects.filter(title__contains=search_text)
+
+    return render(request, 'base.html', {'snippets': snippets})
     
