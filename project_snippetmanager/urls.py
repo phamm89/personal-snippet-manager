@@ -40,6 +40,8 @@ urlpatterns = [
     path('snippet/<int:pk>', core_views.SnippetDetailView.as_view(), name='snippet-detail'),
     path('add_snippet/', core_views.add_snippet, name='add_snippet'),
     path('admin/core/snippet/<int:pk>/change/', core_views.SnippetUpdate.as_view(), name='edit_snippet'),
+    path('snippet/<int:pk>/copy_snippet/', core_views.copy_snippet, name='copy_snippet'),
+    path('user_page/', core_views.user_view, name='user_page'),
 
     # Wire up our API using automatic URL routing.
     # Additionally, we include login URLs for the browsable API.

@@ -1,13 +1,14 @@
-from django.shortcuts import render, get_list_or_404, redirect
-from core.models import Snippet
+from django.shortcuts import render, get_list_or_404, redirect, get_object_or_404
+from core.models import Snippet, CustomUser, UserPage
 from core.forms import SnippetForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from django_filters.rest_framework import DjangoFilterBackend
 from core.filters import SnippetFilter
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 
 
 # Views created for Code Snippet
@@ -51,6 +52,30 @@ class SnippetListView(generic.ListView):
 
 class SnippetDetailView(generic.DetailView):
     model = Snippet
+
+
+@login_required
+def copy_snippet(request, pk):
+    """View function for user to favorite or unfavorite a book."""
+    snippet = get_object_or_404(Snippet, pk=pk)
+    
+    if request.method == 'GET':
+        if request.user in snippet.copy_snippet.all():
+            snippet.copy_snippet.remove(request.user)
+            messages.info(request, f"You have removed {snippet.copy_snippet} from your favorites book list.")
+        else:
+            snippet.copy_snippet.add(request.user)
+            messages.success(request, f"You have added {snippet.copy_snippet} from your favorites book list.")
+            
+    return HttpResponseRedirect(request.GET.get("next"))
+
+
+@login_required
+def user_view(request):
+    """View function for user to view all books in favorite list."""
+    user_list = UserPage.objects.filter(user=request.user)
+
+    return render(request, 'core/user_detail.html', {'user_list': user_list})
 
 # View to delete snippet
 def delete_snippet(request, pk):

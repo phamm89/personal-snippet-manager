@@ -67,9 +67,12 @@ class Snippet(models.Model):
         description = models.TextField(max_length=200, null=True, blank=True, help_text="Enter a docstring to describe the snippet of code.")
         
         # More descriptive than user
-        creator = models.ForeignKey(to=CustomUser, on_delete=models.CASCADE)
+        creator = models.CharField(max_length=200, help_text='Enter the name of the creator')
 
         date_added = models.DateTimeField(auto_now_add=True)
+
+        # ManyToManyField used because user list can contain many snippets 
+        copy_snippet = models.ManyToManyField(to=CustomUser, through='UserPage', help_text='Click to add snippet to user page.')
         
         class Meta: 
             ordering = ['-date_added']
@@ -80,3 +83,17 @@ class Snippet(models.Model):
         
         def get_absolute_url(self):
             return reverse('snippet-detail', args=[str(self.id)])
+
+
+class UserPage(models.Model):
+    """Model representing a user selecting a snippet to add to user page"""
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    snippet = models.ForeignKey(Snippet, on_delete=models.CASCADE)
+    copied_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-copied_at']
+    
+    def __str__(self):
+        """String for representing the Favorite object."""
+        return f"{self.user.username} - {self.snippet.title}"
