@@ -4,6 +4,9 @@ from core.forms import SnippetForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django_filters.rest_framework import DjangoFilterBackend
+from core.filters import SnippetFilter
+
 
 # Views created for Code Snippet
 def index(request):
@@ -11,6 +14,7 @@ def index(request):
 
     snippet_codes_count = Snippet.objects.all().count()
     snippet_codes = Snippet.objects.all()
+
 
     context = {
         'snippet_codes_count': snippet_codes_count,
@@ -52,3 +56,4 @@ def delete_snippet(request):
         return redirect('index')
     
     return render(request, 'core/snippet_confirm_delete.html')
+    
