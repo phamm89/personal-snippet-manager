@@ -54,7 +54,7 @@ class SnippetDetailView(generic.DetailView):
     model = Snippet
 
 
-@login_required
+
 def copy_snippet(request, pk):
     """View function for user to favorite or unfavorite a book."""
     snippet = get_object_or_404(Snippet, pk=pk)
@@ -70,7 +70,7 @@ def copy_snippet(request, pk):
     return HttpResponseRedirect(request.GET.get("next"))
 
 
-@login_required
+
 def user_view(request):
     """View function for user to view all books in favorite list."""
     user_list = UserPage.objects.filter(user=request.user)

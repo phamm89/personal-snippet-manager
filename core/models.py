@@ -61,13 +61,13 @@ class Snippet(models.Model):
         default=HTML,
     )
 
-        code = models.TextField(help_text="Enter the snippet code")
+        code = models.TextField(help_text="Enter the snippet code.")
         
         # Description field is optional
         description = models.TextField(max_length=200, null=True, blank=True, help_text="Enter a docstring to describe the snippet of code.")
         
         # More descriptive than user
-        creator = models.CharField(max_length=200, help_text='Enter the name of the creator')
+        creator = models.CharField(max_length=200, help_text="Enter the name of the creator.")
 
         date_added = models.DateTimeField(auto_now_add=True)
 
