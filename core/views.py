@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django_filters.rest_framework import DjangoFilterBackend
 from core.filters import SnippetFilter
+from django.http import HttpResponseRedirect, HttpResponse
+from django.views import generic
 
 
 # Views created for Code Snippet
@@ -44,14 +46,21 @@ class SnippetUpdate(UpdateView):
     fields = '__all__'
     success_url = reverse_lazy('index')
 
+class SnippetListView(generic.ListView):
+    model = Snippet
+
+class SnippetDetailView(generic.DetailView):
+    model = Snippet
+
 # View to delete snippet
-def delete_snippet(request):
-    snippet = get_list_or_404(Snippet)
+def delete_snippet(request, pk):
+    snippet = Snippet.objects.get(pk=id)
 
     if request.method =="POST":
         snippet.delete()
         messages.success(request, "Code snippet deleted!")
         return redirect('index')
+
     
     return render(request, 'core/snippet_confirm_delete.html')
 
@@ -65,4 +74,8 @@ def search_snippet(request):
     snippets = Snippet.objects.filter(title__contains=search_text)
 
     return render(request, 'base.html', {'snippets': snippets})
+
+class SnippetDelete(DeleteView):
+    model = Snippet
+    success_url = reverse_lazy('index')
     
