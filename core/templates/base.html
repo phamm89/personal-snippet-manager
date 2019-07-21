@@ -30,53 +30,28 @@
             <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="{% url 'snippets' %}">All Snippets</a>
           {% if request.user.is_authenticated %}
             Logged in as {{ request.user }}  |    <a href="{% url 'user_list' %}">User Profile Page</a>    |   <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="{% url 'auth_logout' %}">Logout</a>
+            <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="{% url 'search_list' %}">Click to Search</a>
           {% else %}
             <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="{% url 'auth_login' %}">Login</a> |
             <a class="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l" href="{% url 'registration_register' %}">Register</a>
           {% endif %}
           </nav>
-          <form id="searchForm">
+        <form id="searchForm">
             {% csrf_token %}
             <div id="codeSearch"> 
                 <input id="searchBar" type="text" placeholder="Search for Code Snippet..." onfocus="this.value=''">
                 <button id="searchButton" type="submit">Search</button>
         </form>
         <hr>
-        <div id="searchDiv">
+        <!-- <div id="searchDiv">
         <h2 id="searchHeader">Search Results: </h2>
-        </div>
+        </div> -->
         <br>
-        <div id="searchResultsView">
-            <div class='tc center avenir w-70'>
-                {% if snippets.count > 0 %}
-                  {% for obj in snippets %}
-                  <div class='ba bg-blue white'>
-                    <p><strong> {{obj.title}}</strong></p>
-                    <a class='f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue' href="{{ obj.get_absolute_url }}">Edit</a>
-                    <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'add_snippet' %}">Add New</a>
-                    <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'delete_snippet' %}">Delete</a>
-                  </div>
-                  <div>
-                      <p>by {{obj.creator}}</p>
-                      <p>added {{obj.date_added}}</p>
-                  </div>
-                  <div>
-                    <p> Language: {{obj.languages}}</p>
-                  </div>
-                  <div><pre><code class='language-{{obj.languages}}'>
-                  <p>{{obj.code }}</p>
-                  </code></pre>
-                  </div>
-                  {% endfor %}
-                {% else %}
-                  <li>No Results!</li>
-                {% endif %}
-           </div>
-        </div>
+        <div id="searchResultsView"></div>
         <br> 
         <div id="searchResults">
           <div id="search"></div>
-      </div>
+        </div>
         </header>
   </header>
         <div>

@@ -43,6 +43,8 @@ urlpatterns = [
     path('snippet/<int:pk>/copy_snippet/', core_views.copy_snippet, name='copy_snippet'),
     path('user_list/', core_views.user_list, name='user_list'),
 
+    path('snippets/search', core_views.all_public_snippets, name = 'search_list'),
+
     # Wire up our API using automatic URL routing.
     # Additionally, we include login URLs for the browsable API.
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),

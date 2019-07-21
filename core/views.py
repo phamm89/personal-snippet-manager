@@ -114,4 +114,12 @@ class SnippetDeleteView(DeleteView):
             return JsonResponse({"complete": True})
 
         return redirect('core/snippet_list.html')
+
+
+def all_public_snippets(request):
+    template_name = 'core/search_list.html'
+    snippets = Snippet.objects.filter()
+    snippets_filter = SnippetFilter(request.GET, queryset=snippets)
+
+    return render(request, 'core/search_list.html', {'filter': snippets_filter})
     

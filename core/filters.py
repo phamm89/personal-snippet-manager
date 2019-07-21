@@ -9,5 +9,6 @@ class SnippetFilter(django_filters.FilterSet):
         fields = {
             'title': ['icontains',], 
             'languages': ['exact',], 
+            'code': ['icontains',],
             'creator': ['exact',], 
         }

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="ml3 mt0 pa2">
+    <form method="GET">
+        <tr class="flex wrap around">
+                <td>{{ filter.form.title__icontains.label_tag }}</td>
+                <td>{{ filter.form.title__icontains }}</td>
+
+                <td>{{ filter.form.code__icontains.label_tag }}</td>
+                <td>{{ filter.form.code__icontains }}</td>
+
+                <td>{{ filter.form.languages.label_tag }}</td>
+                <td>{{ filter.form.languages }}</td>
+
+                <td>{{ filter.form.creator.label_tag }}</td>
+                <td>{{ filter.form.creator }}</td>
+
+                <button class="font button-snippet dim ml4" type='submit'>Search</button>
+        </tr>
+    </form>
+  </div>
+  <h2>Public Snippets</h2>
+  {% for snippet in filter.qs %}
+  <div class="ml5 f4">
+      
+      <div>
+          <a class="detail-links link black body-font mb3" href="">
+              {{snippet}}
+          </a>
+          <span class="f6 gray">
+              Added by: <a class="link black detail-links dim" href="">{{snippet.creator}}</a>
+              <span class="f6 black"> ~ {{snippet.languages|upper}}</span>
+          </span>
+      </div>
+      
+      <div class="js-snippetcontent ma2 f5 w-50 h-auto ba b--black pa2">
+          {{snippet.code}}
+      </div>
+      <div class="flex column">
+          <div class="f6 mb2">Date added: <em>{{snippet.date_added}}</em></div>
+      </div>  
+  </div>
+  {% endfor %}
+  </div>
+
+
+{% endblock %}
