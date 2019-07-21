@@ -15,6 +15,7 @@ let searchURL
 const searchForm = q('#searchForm')
 const searchButton = q('#searchButton')
 const searchBar = q('#searchBar')
+const cors = `https://cors-anywhere.herokuapp.com/`
 
 
 // When user releases Enter key, act as if submit button has been clicked
@@ -63,9 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault()
         input = encodeURIComponent(searchBar.value)
         searchURL = `http://localhost:8000/?search=${(input)}`
-        const cors = `https://cors-anywhere.herokuapp.com/`
+        
 
-        fetch(cors + searchURL)
+        fetch(searchURL)
             .then(response => response.json())
             .then(function (data) {
                 console.log(data)
