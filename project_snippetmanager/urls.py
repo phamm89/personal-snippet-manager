@@ -35,8 +35,8 @@ router.register(r'customusers', CustomUserViewSet)
 urlpatterns = [
     path('', core_views.index, name='index'), 
     path('accounts/', include('registration.backends.simple.urls')),
-    path('snippets/', core_views.SnippetListView.as_view(), name='snippets'),
-    path('snippet/<int:pk>', core_views.SnippetDetailView.as_view(), name='snippet-detail'),
+    path('snippets', core_views.SnippetListView.as_view(), name='snippets'),
+    path('snippet/<int:pk>/snippet_detail', core_views.SnippetDetailView.as_view(), name='snippet-detail'),
     path('add_snippet/', core_views.add_snippet, name='add_snippet'),
     path('edit_snippet/<int:pk>/edit/', core_views.SnippetUpdate.as_view(), name='edit_snippet'),
     path('snippet_delete/<int:pk>/delete/', core_views.SnippetDeleteView.as_view(), name='snippet-delete'),
