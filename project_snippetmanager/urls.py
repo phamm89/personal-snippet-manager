@@ -38,10 +38,10 @@ urlpatterns = [
     path('snippets/', core_views.SnippetListView.as_view(), name='snippets'),
     path('snippet/<int:pk>', core_views.SnippetDetailView.as_view(), name='snippet-detail'),
     path('add_snippet/', core_views.add_snippet, name='add_snippet'),
-    path('edit_snippet/', core_views.SnippetUpdate.as_view(), name='edit_snippet'),
-    path(r'(?P<pk>\d+)/$', core_views.snippet_delete, name='snippet-delete'),
+    path('edit_snippet/<int:pk>/edit/', core_views.SnippetUpdate.as_view(), name='edit_snippet'),
+    path('snippet_delete/<int:pk>/delete/', core_views.SnippetDeleteView.as_view(), name='snippet-delete'),
     path('snippet/<int:pk>/copy_snippet/', core_views.copy_snippet, name='copy_snippet'),
-    path('user_page/', core_views.user_view, name='user_page'),
+    path('user_list/', core_views.user_list, name='user_list'),
 
     # Wire up our API using automatic URL routing.
     # Additionally, we include login URLs for the browsable API.

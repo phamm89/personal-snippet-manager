@@ -25,7 +25,7 @@ class SnippetViewSet(viewsets.ModelViewSet):
 
 
 #View for API to Delete Snippet
-class DeleteSnippet(generics.DestroyAPIView):
+class SnippetDelete(generics.DestroyAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
 

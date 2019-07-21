@@ -9,6 +9,7 @@ from core.filters import SnippetFilter
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views import generic
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 
 # Views created for Code Snippet
@@ -72,17 +73,17 @@ def copy_snippet(request, pk):
 
 
 
-def user_view(request):
-    """View function for user to view all code snippets on user page."""
+def user_list(request):
+    """View function for user to view all code snippets on user list."""
     user_list = UserPage.objects.filter(user=request.user)
 
-    return render(request, 'core/user_detail.html', {'user_list': user_list})
+    return render(request, 'core/user_list.html', {'user_list': user_list})
 
 # View to delete snippet
-def snippet_delete(request, pk):
-    snippet = Snippet.objects.get(pk=id)
+def snippet_delete(request, id=None):
+    snippet = Snippet.objects.get(id=id)
 
-    if request.method =="POST":
+    if request.method =="GET":
         snippet.delete()
         messages.success(request, "Code snippet deleted!")
         return redirect('index')
@@ -101,4 +102,16 @@ def search_snippet(request):
 
     return render(request, 'base.html', {'snippets': snippets})
 
+
+class SnippetDeleteView(DeleteView):
+    model = Snippet
+    template_name = 'core/snippet_delete.html'
+    success_url = reverse_lazy('snippets')
+
+    def form_validation(self, request):
+
+        if self.request.is_ajax():
+            return JsonResponse({"complete": True})
+
+        return redirect('core/snippet_list.html')
     
