@@ -1,6 +1,21 @@
 # Personal Code Snippet Manager
 In Momentum Learning, my group is working on developing a Code Snippet Manager web application. This personal code snippet manager is being developed in order for me to better understand the setup of a web application involving Django and JavaScript.
 
+## Project Description for Code Snippet Manager Assigned in Momentum Learning
+
+You need a good way to manage snippets of code you reuse often. You are going to build a web application that has these goals:
+
+- Registered users can add code snippets.
+- Registered users can search their own code snippets and get results _quickly_. There should be no page reload involved in this search -- you'll need JS and Ajax.
+- Each user has a profile page that shows their public code snippets. Other users can copy a snippet with one click, adding it to their library of snippets.
+
+## Project Additions
+
+In addition to working on the project description, we were encouraged add to the project by learning how to utilize a feature or features we had not previously used. Our group achieved the following additions for the project:
+
+- Utilized Markdown to modify the README
+- Utilized Third-Party Apps: Django Filter, Rest Framework API, Prism.JS, and Clipboard.JS
+
 ## Creating a Github Repository
 - On Github, click "New" to create a repository
 - Name the repository and click "Create Repository"
