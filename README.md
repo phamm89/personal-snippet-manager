@@ -118,7 +118,7 @@ npm install -g npm-run-all
 ## Django Registration Redux
 Django Registration Redux is a login/logout setup provided by Django. To set up, follow the directions at the following site: [https://django-registration-redux.readthedocs.io/en/latest/](https://django-registration-redux.readthedocs.io/en/latest/)
 
-##Deploying to Heroku
+## Deploying to Heroku
 - Create new app at [https://dashboard.heroku.com/new-app](https://dashboard.heroku.com/new-app)
 - Log into the Heroku CLI: ```heroku login```. If you have not installed the CLI, go to [https://devcenter.heroku.com/articles/heroku-cli](https://devcenter.heroku.com/articles/heroku-cli) to install it.
 - Add ```heroku``` remote to your Git repository: ```heroku git:remote -a <app-name>```
