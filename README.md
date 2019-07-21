@@ -117,3 +117,31 @@ npm install -g npm-run-all
 
 ## Django Registration Redux
 Django Registration Redux is a login/logout setup provided by Django. To set up, follow the directions at the following site: [https://django-registration-redux.readthedocs.io/en/latest/](https://django-registration-redux.readthedocs.io/en/latest/)
+
+##Deploying to Heroku
+- Create new app at [https://dashboard.heroku.com/new-app](https://dashboard.heroku.com/new-app)
+- Log into the Heroku CLI: ```heroku login```. If you have not installed the CLI, go to [https://devcenter.heroku.com/articles/heroku-cli](https://devcenter.heroku.com/articles/heroku-cli) to install it.
+- Add ```heroku``` remote to your Git repository: ```heroku git:remote -a <app-name>```
+- Install ```django-heroku``` in your Django app: ```pipenv install django-heroku```
+- Add ```django-heroku``` to your ```settings.py``` At the bottom of ```settings.py```, add
+```bash
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
+```
+- Commit your code after adding django-heroku.
+- Install gunicorn in your Django app: ```pipenv install gunicorn.```
+- Add a new file called Procfile: 
+web: gunicorn <project_dir>.wsgi
+- Commit your code after adding gunicorn and a Procfile.
+- Push to Heroku: ```git push heroku master```. You will likely have a failure the first time. Debug.
+- Run migrations on Heroku: ```heroku run python3 manage.py migrate```
+- Create a superuser on Heroku: ```heroku run python3 manage.py createsuperuser```
+- Set a secret key just for Heroku: ```heroku config:set SECRET_KEY=$(date | md5)```
+- Once you are sure your app works, turn off ```DEBUG``` on Heroku.
+- To turn off DEBUG, replace "DEBUG = True" in your settings.py with:
+```bash
+in_production = bool(os.getenv('PRODUCTION'))
+DEBUG = not in_production
+```
+- And then run ```"heroku config:set PRODUCTION=True"```
