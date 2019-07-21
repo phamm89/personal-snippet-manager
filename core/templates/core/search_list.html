@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% load staticfiles %}
+
 {% block content %}
 <div class="ml3 mt0 pa2">
     <form method="GET">
         <tr class="flex wrap around">
-                <td id="searchBar" type="text" placeholder="Search for Code Snippet...">{{ filter.form.title__icontains.label_tag }}</td>
-                <td id="searchBar" type="text" placeholder="Search for Code Snippet...">{{ filter.form.title__icontains }}</td>
+                <td>{{ filter.form.title__icontains.label_tag }}</td>
+                <td>{{ filter.form.title__icontains }}</td>
 
                 <td>{{ filter.form.code__icontains.label_tag }}</td>
                 <td>{{ filter.form.code__icontains }}</td>
