@@ -79,7 +79,7 @@ def user_view(request):
     return render(request, 'core/user_detail.html', {'user_list': user_list})
 
 # View to delete snippet
-def delete_snippet(request, pk):
+def snippet_delete(request, pk):
     snippet = Snippet.objects.get(pk=id)
 
     if request.method =="POST":
@@ -88,7 +88,7 @@ def delete_snippet(request, pk):
         return redirect('index')
 
     
-    return render(request, 'core/snippet_confirm_delete.html')
+    return render(request, 'core/snippet_delete.html')
 
 # View to search snippet
 def search_snippet(request):

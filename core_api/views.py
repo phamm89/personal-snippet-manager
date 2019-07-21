@@ -4,6 +4,7 @@ from core_api.serializers import CustomUserSerializer, SnippetSerializer
 from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework.views import APIView
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 # Views for API Created Here
@@ -13,7 +14,6 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     """
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
-
 
 
 class SnippetViewSet(viewsets.ModelViewSet):
@@ -28,3 +28,5 @@ class SnippetViewSet(viewsets.ModelViewSet):
 class DeleteSnippet(generics.DestroyAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
+
+        
