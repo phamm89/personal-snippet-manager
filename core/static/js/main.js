@@ -89,7 +89,9 @@ function UserPage(obj) {
             <a class='f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue' href="{{ snippet.get_absolute_url }}">Edit</a>
             <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'add_snippet' %}">Add New</a>
             <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'delete_snippet' %}">Delete</a>
-        </div>
+            <button class="copy-button" data-id="{{obj.id}}" data-title="{{obj.title}}"  data-creator="{{obj.creator}}" data-date="{{obj.date_added}}" data-languages="{{obj.languages}}" data-code="{{obj.code}}" data-clipboard-target="#obj-content-{{obj.id}}"> 
+            Copy Snippet</button>   
+         </div>
         <div>
             <p>by ${obj.creator}</p>
             <p>added ${obj.date_added}</p>

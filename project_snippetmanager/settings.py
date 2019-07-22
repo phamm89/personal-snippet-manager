@@ -165,6 +165,9 @@ REST_FRAMEWORK = {
 # Crispy Forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+# CORS Origin
+CORS_ORIGIN_ALLOW_ALL = True
+
 # Configure Django App for Heroku.
 import django_heroku
 django_heroku.settings(locals())
