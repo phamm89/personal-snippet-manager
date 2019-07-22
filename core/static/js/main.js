@@ -121,7 +121,7 @@ function copySnippet() {
         obj.content = event.text
         $.ajax({
             type: "POST",
-            url: "/api/add_snippet/",
+            url: "/api/snippets/",
             dataType: "json",
             data: {
                 title: `${obj.title} `,

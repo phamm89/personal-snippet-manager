@@ -5,6 +5,7 @@ from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
+from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 
 
 # Views for API Created Here
@@ -35,6 +36,15 @@ class SnippetListCreateView(generics.ListCreateAPIView):
     serializer_class = SnippetSerializer
     filter_backends = (DjangoFilterBackend,)
     queryset: Snippet.objects.all().order_by("-date_added")
+
+    def get_queryset(self):
+        vector = SearchVector('creator', 'languages', 'code',
+                              'title', )
+        if self.request.GET.get("search"):
+            query = self.request.GET.get("search")
+            return Snippet.objects.annotate(search=vector).filter(search=query)
+        else:
+            return Snippet.objects.filter()
 
     def perform_create(self, serializer):
        print(self.request)
