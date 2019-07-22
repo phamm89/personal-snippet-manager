@@ -12,6 +12,7 @@ function qAll (selector) {
 // Variables
 let input
 let searchURL
+let count = 0
 let csrftoken = getCookie('csrftoken')
 const searchResults = q('#searchResults')
 const copyResults = q('#copyResults')
@@ -70,6 +71,7 @@ function getSearch(codes){
             <div><pre><code class='language-${codes.languages}'>
                 <p>${codes.code }</p>
             </code></pre>
+            <div><p>Snippet has been copied {{count}} times.</p></div>
             </div>
     `
 
@@ -127,6 +129,8 @@ function copySnippet() {
             }
         }).then(function (success) {
             console.log(success)
+            count++
+            console.log(count)
             copyResults.innerHTML = ''
 
             copyResults.append(UserPage(obj))
