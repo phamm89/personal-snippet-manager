@@ -57,7 +57,7 @@ function getSearch(codes){
     resultsDiv.innerHTML = `
             <div class='ba bg-blue white'>
                 <p><strong>${codes.title}</strong></p>
-                <a class='f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue' href="{{ codes.get_absolute_url }}">Edit</a>
+                <a class='f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue' href="${codes.get_absolute_url}">Edit</a>
                 <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'add_snippet' %}">Add New</a>
                 <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'delete_snippet' %}">Delete</a>
             </div>
@@ -86,10 +86,10 @@ function UserPage(obj) {
     copyDiv.innerHTML = `   
             <div class='ba bg-blue white'>
             <p><strong>${obj.title}</strong></p>
-            <a class='f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue' href="{{ snippet.get_absolute_url }}">Edit</a>
+            <a class='f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue' href="${obj.get_absolute_url}">Edit</a>
             <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'add_snippet' %}">Add New</a>
             <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'delete_snippet' %}">Delete</a>
-            <button class="copy-button" data-id="{{obj.id}}" data-title="{{obj.title}}"  data-creator="{{obj.creator}}" data-date="{{obj.date_added}}" data-languages="{{obj.languages}}" data-code="{{obj.code}}" data-clipboard-target="#obj-content-{{obj.id}}"> 
+            <button class="copy-button" data-id="${obj.id}" data-title="${obj.title}"  data-creator="${obj.creator}" data-date="${obj.date_added}" data-languages="${obj.languages}" data-code="${obj.code}" data-clipboard-target="#obj-content-${obj.id}"> 
             Copy Snippet</button>   
          </div>
         <div>
@@ -99,8 +99,8 @@ function UserPage(obj) {
         <div>
             <p> Language: ${obj.languages}</p>
         </div>
-        <div><pre><code class='language-${obj.languages}'>
-            <p>${obj.code }</p>
+        <div><pre><code class='language-${obj.languages}' id="obj-content-${obj.id}">
+        <p>${obj.code }</p>
         </code></pre>
         </div>
 `
