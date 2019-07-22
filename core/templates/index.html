@@ -18,10 +18,10 @@
     <div class='tc center avenir w-70'>
         {% for obj in snippet_codes %}
           <div class='ba bg-blue white'>
-            <p><strong> {{obj.title}}</strong></p>
-            <a class='f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue' href="{% url 'edit_snippet' obj.pk %}">Edit</a>
-            <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'add_snippet' %}">Add New</a>
-            <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{{ obj.get_absolute_url }}">Delete</a>
+            <p id="snippetTitle"><strong> {{obj.title}}</strong></p>
+            <a class='f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue' id="editButton" href="{% url 'edit_snippet' obj.pk %}">Edit</a>
+            <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" id="addButton" href="{% url 'add_snippet' %}">Add New</a>
+            <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" id="deleteButton" href="{{ obj.get_absolute_url }}">Delete</a>
             <button class="copy-button" data-id="{{obj.id}}" data-title="{{obj.title}}"  data-creator="{{obj.creator}}" data-date="{{obj.date_added}}" data-languages="{{obj.languages}}" data-code="{{obj.code}}" data-clipboard-target="#obj-content-{{obj.id}}"> 
               Copy Snippet</button>    
             {% if request.user.is_authenticated and request.user not in snippet.copy_snippet.all %}
@@ -31,18 +31,18 @@
             {% endif %}
           </div>
           <div>
-              <p>by {{obj.creator}}</p>
-              <p>added {{obj.date_added}}</p>
+              <p id="snippetCreator">by {{obj.creator}}</p>
+              <p id="snippetDate">added {{obj.date_added}}</p>
           </div>
           <div>
-            <p> Language: {{obj.languages}}</p>
+            <p id="snippetLanguages"> Language: {{obj.languages}}</p>
           </div>
           <div><pre><code class='language-{{obj.languages}}' id="obj-content-{{obj.id}}">
-          <p>{{obj.code }}</p>
+          <p id="snippetCode">{{obj.code }}</p>
           </code></pre>
           </div>
         {% endfor %} 
-        <a class="f5 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'add_snippet' %}">Add Snippet</a>
+        <a class="f5 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" id="addButton" href="{% url 'add_snippet' %}">Add Snippet</a>
    </div>
   
    {% else %}

@@ -56,20 +56,22 @@ function getSearch(codes){
     resultsDiv.setAttribute("id", "resultsDiv")
     resultsDiv.innerHTML = `
             <div class='ba bg-blue white'>
-                <p><strong>${codes.title}</strong></p>
-                <a class='f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue' href="${codes.get_absolute_url}">Edit</a>
-                <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'add_snippet' %}">Add New</a>
-                <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'delete_snippet' %}">Delete</a>
+                <p id="snippetTitle"><strong>${codes.title}</strong></p>
+                <a class='f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue' id="editButton" href="{% url 'edit_snippet' obj.pk %}">Edit</a>
+                <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" id="addButton" href="{% url 'add_snippet' %}">Add New</a>
+                <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" id="deleteButton" href="{{ obj.get_absolute_url }}">Delete</a>
+                <button class="copy-button" data-id="${obj.id}" data-title="${obj.title}"  data-creator="${obj.creator}" data-date="${obj.date_added}" data-languages="${obj.languages}" data-code="${obj.code}" data-clipboard-target="#obj-content-${obj.id}"> 
+                Copy Snippet</button>   
             </div>
             <div>
-                <p>by ${codes.creator}</p>
-                <p>added ${codes.date_added}</p>
+                <p id="snippetCreator">by ${codes.creator}</p>
+                <p id="snippetDate">added ${codes.date_added}</p>
             </div>
             <div>
-                <p> Language: ${codes.languages}</p>
+                <p id="snippetLanguages"> Language: ${codes.languages}</p>
             </div>
-            <div><pre><code class='language-${codes.languages}'>
-                <p>${codes.code }</p>
+            <div><pre><code class='language-${codes.languages}' id="obj-content-{{codes.id}}">
+                <p id="snippetCode">${codes.code }</p>
             </code></pre>
             <div><p>Snippet has been copied {{count}} times.</p></div>
             </div>
@@ -85,22 +87,22 @@ function UserPage(obj) {
     copyDiv.setAttribute("id", "copyDiv")
     copyDiv.innerHTML = `   
             <div class='ba bg-blue white'>
-            <p><strong>${obj.title}</strong></p>
-            <a class='f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue' href="${obj.get_absolute_url}">Edit</a>
-            <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'add_snippet' %}">Add New</a>
-            <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" href="{% url 'delete_snippet' %}">Delete</a>
+            <p id="snippetTitle"><strong>${obj.title}</strong></p>
+            <a class='f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue' id="editButton" href="{% url 'edit_snippet' obj.pk %}">Edit</a>
+            <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" id="addButton" href="{% url 'add_snippet' %}">Add New</a>
+            <a class="f6 link mt5 dim br3 ph3 pv2 mb2 dib white bg-dark-blue" id="deleteButton" href="{{ obj.get_absolute_url }}">Delete</a>
             <button class="copy-button" data-id="${obj.id}" data-title="${obj.title}"  data-creator="${obj.creator}" data-date="${obj.date_added}" data-languages="${obj.languages}" data-code="${obj.code}" data-clipboard-target="#obj-content-${obj.id}"> 
             Copy Snippet</button>   
          </div>
         <div>
-            <p>by ${obj.creator}</p>
-            <p>added ${obj.date_added}</p>
+            <p id="snippetCreator">by ${obj.creator}</p>
+            <p id="snippetDate">added ${obj.date_added}</p>
         </div>
         <div>
-            <p> Language: ${obj.languages}</p>
+            <p id="snippetLanguages"> Language: ${obj.languages}</p>
         </div>
         <div><pre><code class='language-${obj.languages}' id="obj-content-${obj.id}">
-        <p>${obj.code }</p>
+        <p id="snippetCode">${obj.code }</p>
         </code></pre>
         </div>
 `
@@ -119,7 +121,7 @@ function copySnippet() {
         obj.content = event.text
         $.ajax({
             type: "POST",
-            url: "/api/snippets/",
+            url: "/api/add_snippet/",
             dataType: "json",
             data: {
                 title: `${obj.title} `,

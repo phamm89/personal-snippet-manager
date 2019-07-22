@@ -29,4 +29,27 @@ class SnippetDelete(generics.DestroyAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
 
+
+class SnippetListCreateView(generics.ListCreateAPIView):
+    """API endpoint that allows snippets to be listed, created, and searched."""
+    serializer_class = SnippetSerializer
+    filter_backends = (DjangoFilterBackend,)
+    queryset: Snippet.objects.all().order_by("-date_added")
+
+    def perform_create(self, serializer):
+       print(self.request)
+       serializer.save(creator=self.request.user)
+
+
+class CustomUserListCreateView(generics.ListCreateAPIView):
+    """API endpoint that allows user to see snippets for their user page."""
+    serializer_class = SnippetSerializer
+
+    def get_queryset(self):
+       return self.request.user.snippets
+
+    def perform_create(self, serializer):
+       print(self.request)
+       serializer.save(creator=self.request.user)
+
         
