@@ -120,42 +120,44 @@ let copyDict
 
 const copyButton = document.querySelector('#copyButton')
 
-document.querySelector('#copyResults').addEventListener('click', function (event) {
-    if (event.target && event.target.matches('.copy-button')) {
-        titleCopy = event.target.dataset['title']
-        creatorCopy = event.target.dataset['creator']
-        languagesCopy = event.target.dataset['languages']
-        codeCopy = decodeURI(event.target.dataset['code'])
-        copyOriginal = event.target.dataset['pk']
 
-
-        copyDict = {
-            "title": titleCopy,
-            "creator": creatorCopy,
-            "languages": languagesCopy,
-            "code": codeCopy,
-            "original": copyOriginal,
-        }
-        // console.log(copyDict)
-        console.log(JSON.stringify(copyDict))
-        fetch('http://localhost:8000/snippets/', {
-            method: 'POST',
-            body: JSON.stringify(copyDict),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.json())
-            .then(response => console.log('Success:', JSON.stringify(response)))
-            .catch(error => console.error('Error:', error));
-        let copySuccess = '#copySuccess' + copyOriginal
-        document.querySelector(copySuccess).innerHTML = '<p>You made a copy to your profile!</p>'
-    }
-})
 
 
 
 // Main execution
 document.addEventListener('DOMContentLoaded', function() {
+
+    copyResults.addEventListener('click', function (event) {
+        if (event.target && event.target.matches('.copy-button')) {
+            titleCopy = event.target.dataset['title']
+            creatorCopy = event.target.dataset['creator']
+            languagesCopy = event.target.dataset['languages']
+            codeCopy = decodeURI(event.target.dataset['code'])
+            copyOriginal = event.target.dataset['pk']
+    
+    
+            copyDict = {
+                "title": titleCopy,
+                "creator": creatorCopy,
+                "languages": languagesCopy,
+                "code": codeCopy,
+                "original": copyOriginal,
+            }
+            // console.log(copyDict)
+            console.log(JSON.stringify(copyDict))
+            fetch('http://localhost:8000/user_list/', {
+                method: 'POST',
+                body: JSON.stringify(copyDict),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+                .then(response => console.log('Success:', JSON.stringify(response)))
+                .catch(error => console.error('Error:', error));
+            let copySuccess = '#copySuccess' + copyOriginal
+            document.querySelector(copySuccess).innerHTML = '<p>You made a copy to your profile!</p>'
+        }
+    })
 
 
 
