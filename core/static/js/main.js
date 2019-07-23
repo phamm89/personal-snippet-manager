@@ -111,49 +111,53 @@ function UserPage(obj) {
 }
 
 
-// Function to Copy Snippets using ClipboardJS
-function copySnippet() {
+let titleCopy
+let creatorCopy
+let languagesCopy
+let codeCopy
+let copyOriginal
+let copyDict
 
-    let copyButton = new ClipboardJS('.copy-button')
+const copyButton = document.querySelector('#copyButton')
 
-    copyButton.on("success", function (event) {
-        let obj = $(event.trigger).data()
-        obj.content = event.text
-        $.ajax({
-            type: "POST",
-            url: "/api/snippets/",
-            dataType: "json",
-            data: {
-                title: `${obj.title} `,
-                creator: `${obj.creator}`,
-                date: `${obj.date_added}`,
-                language: `${obj.languages} `,
-                code: `${obj.code} `,
-                csrfmiddlewaretoken: csrftoken,
+document.querySelector('#copyResults').addEventListener('click', function (event) {
+    if (event.target && event.target.matches('.copy-button')) {
+        titleCopy = event.target.dataset['title']
+        creatorCopy = event.target.dataset['creator']
+        languagesCopy = event.target.dataset['languages']
+        codeCopy = decodeURI(event.target.dataset['code'])
+        copyOriginal = event.target.dataset['pk']
+
+
+        copyDict = {
+            "title": titleCopy,
+            "creator": creatorCopy,
+            "languages": languagesCopy,
+            "code": codeCopy,
+            "original": copyOriginal,
+        }
+        // console.log(copyDict)
+        console.log(JSON.stringify(copyDict))
+        fetch('http://localhost:8000/snippets/', {
+            method: 'POST',
+            body: JSON.stringify(copyDict),
+            headers: {
+                'Content-Type': 'application/json'
             }
-        }).then(function (success) {
-            console.log(success)
-            count++
-            console.log(count)
-            copyResults.innerHTML = ''
-
-            copyResults.append(UserPage(obj))
-        })
-    })
-
-    copyButton.on("error", function (event) {
-        console.error('Action:', event.action)
-        console.error('Trigger:', event.trigger)
-    })
-}
+        }).then(res => res.json())
+            .then(response => console.log('Success:', JSON.stringify(response)))
+            .catch(error => console.error('Error:', error));
+        let copySuccess = '#copySuccess' + copyOriginal
+        document.querySelector(copySuccess).innerHTML = '<p>You made a copy to your profile!</p>'
+    }
+})
 
 
 
 // Main execution
 document.addEventListener('DOMContentLoaded', function() {
 
-// Execution for copySnippet()
-copySnippet()
+
 
     // Execution for generating list of results upon search button clicked or enter key pressed
     searchForm.addEventListener('submit', function(event) {
