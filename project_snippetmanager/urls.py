@@ -52,6 +52,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
+    path("api/", include("core_api.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
 
 
